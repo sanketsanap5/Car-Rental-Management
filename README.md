@@ -14,15 +14,6 @@ The purpose of the database is to maintain the inventory, orders, customers deta
 To manage and expand the rental car business and to maximize the profit by attracting more customers, and help in making critical business decisions by analyzing transactional data and usage pattern reports from the database. 
 Using RDBMS, provide knowledge and create reports for the business management team to make accurate, effective, and crucial decisions towards the advancement of the business and to compete in today’s growing market.
 
-## Team
-
-- Aishwarya Mishra (NUID: 002127206)
-
-- Rumi Jha (NUID: 002172213)
-
-- Sanket Sanap (NUID: 002136240)
-
-- Vignesh Kumar Baskar (NUID: 002196442)
 
 ## Note
 
