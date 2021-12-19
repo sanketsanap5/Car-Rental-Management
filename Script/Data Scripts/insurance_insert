@@ -1,0 +1,10 @@
+--------------------------------------------------------
+--  File created - Wednesday-November-24-2021   
+--------------------------------------------------------
+REM INSERTING into ADMIN.INSURANCE
+SET DEFINE OFF;
+Insert into ADMIN.INSURANCE (INSURANCE_ID,SUMMARY,INSURANCE_TYPE,INSURANCE_COST) values (50001,'Cover damages for injuries and property of others','Liability coverage',700);
+Insert into ADMIN.INSURANCE (INSURANCE_ID,SUMMARY,INSURANCE_TYPE,INSURANCE_COST) values (50002,'Cover damage to car after an accident','Collision insurance ',750);
+Insert into ADMIN.INSURANCE (INSURANCE_ID,SUMMARY,INSURANCE_TYPE,INSURANCE_COST) values (50003,'Cover damages apart from collisions','Comprehensive insurance',750);
+Insert into ADMIN.INSURANCE (INSURANCE_ID,SUMMARY,INSURANCE_TYPE,INSURANCE_COST) values (50004,'Cover damages against hit-and-run accidents','Uninsured motorist insurance',850);
+Insert into ADMIN.INSURANCE (INSURANCE_ID,SUMMARY,INSURANCE_TYPE,INSURANCE_COST) values (50005,'Cover damages when low third party insurance','Underinsured motorist insurance',850);
