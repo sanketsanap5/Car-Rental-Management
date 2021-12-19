@@ -1,0 +1,907 @@
+
+/******************************************
+
+!!! Do NOT Remove Commented Code from this File !!!
+
+*******************************************/
+
+
+SELECT * FROM USER_SEQUENCES;
+
+SELECT CUST_ID_SEQ.CURRVAL FROM DUAL;
+SELECT ADDRESS_ID_SEQ.CURRVAL FROM DUAL;
+SELECT ACTIVITY_ID_SEQ.CURRVAL FROM DUAL;
+
+SELECT RECORD_ID_SEQ.CURRVAL from dual;
+
+
+/* 
+CREATE SEQUENCE ADDRESS_ID_SEQ
+     START WITH 11111
+     INCREMENT BY 1
+     ORDER;
+*/
+
+-- drop sequence CUST_ID_SEQ;
+-- drop sequence CUST_ID_FOR_ADDR_SEQ;
+
+/*CREATE SEQUENCE CUST_ID_SEQ
+     START WITH 1001
+     INCREMENT BY 1
+     ORDER;
+*/
+
+/*CREATE SEQUENCE CUST_ID_FOR_ADDR_SEQ
+     START WITH 1001
+     INCREMENT BY 1
+     ORDER;
+*/
+
+-- Insert Customers from Mocktable
+
+/*INSERT INTO CUSTOMERS (CUSTOMER_ID, FIRST_NAME, LAST_NAME, EMAIL_ID, CONTACT, LICENSE_NUMBER, PASSPORT_NUMBER, CUSTOMER_TYPE)
+select CUST_ID_SEQ.NEXTVAL, first_name, last_name, email_id, 
+decode(length(to_number(SUBSTR(replace(contact,'-',''), -10))),9,CONTACT_9.NEXTVAL,8,CONTACT_9.NEXTVAL,7,CONTACT_9.NEXTVAL, 6,CONTACT_9.NEXTVAL, to_number(SUBSTR(replace(contact,'-',''), -10))) as CONTACT, 
+license_number, passport_number, decode(customer_type,'True','STUDENT','EMPLOYEE') as CUSTOMER_TYPE
+from MOCKDATA 
+;*/
+
+select * from customers;
+
+-- Insert Customers Address from MockAddr
+
+/*
+INSERT INTO customer_address (ADDRESS_ID, ADDRESS_LINE1, ADDRESS_LINE2, CITY_STATE, CITY, CUSTOMER_ID, ZIP_CODE, ADDRESS_TYPE)
+select  ADDRESS_ID_SEQ.NEXTVAL, ADDRESS_LINE1, ADDRESS_LINE2 , CITY_STATE, CITY, 
+CUST_ID_FOR_ADDR_SEQ.NEXTVAL, SUBSTR(ZIP_CODE, -6) as ZIPCODE,
+decode(ADDRESS_TYPE, 'False','HOME','True','OFFICE') as ADDRESS_TYPE 
+from MOCKADDR;
+*/
+
+
+-- This test should return 10k records
+/* 
+select count(*) 
+from CUSTOMERS, CUSTOMER_ADDRESS
+where CUSTOMERS.CUSTOMER_ID = CUSTOMER_ADDRESS.CUSTOMER_ID;
+*/
+
+
+
+/* select first_name, last_name, email_id, 
+decode(length(to_number(SUBSTR(replace(contact,'-',''), -10))),9,6123456789,8,6666123456,7,6666123456, to_number(SUBSTR(replace(contact,'-',''), -10))) as CONTACT, 
+license_number, passport_number, decode(customer_type,'True','Student','Employee')
+from mockdata; */
+
+update car set MAX_PERSON = 5 where CAR_ID = 2005;
+
+--select to_char(login_time,'DD/MON/YYYY HH:MI AM') from MOCKDATA;
+
+/*
+CREATE SEQUENCE CUST_ID_FOR_ACT
+     START WITH 1001
+     INCREMENT BY 1
+     ORDER;
+*/
+
+--drop SEQUENCE CUST_ID_FOR_ACT;
+
+-- select to_char(LOGIN_TIME,'DD/MON/YYYY HH:MI AM') as LOGIN_TIME, to_char((LOGIN_TIME + 1/24),'DD/MON/YYYY HH:MI AM') as LOGOUT_TIME from MOCKDATA;
+/*
+INSERT INTO ACTIVITY (ACTIVITY_ID, LOGIN_TIME, LOGOUT_TIME, CUSTOMER_ID)
+select ACTIVITY_ID_SEQ.NEXTVAL, LOGIN_TIME, (LOGIN_TIME + 1/24) as LOGOUT_TIME, CUST_ID_FOR_ACT.nextval 
+from MOCKDATA;
+*/
+
+select count(*) from MOCKDATA;
+
+/*
+INSERT INTO VIOLATIONS_RECORDS
+select RECORD_ID_SEQ.NEXTVAL, p.RECORD_DATE, CUST_ID_TEMP.NEXTVAL, e.VIOLATION_ID
+from  
+(SELECT VIOLATION_ID
+FROM   (
+    SELECT VIOLATION_ID
+    FROM   VIOLATIONS
+    ORDER BY DBMS_RANDOM.RANDOM)
+WHERE  rownum < 15) e,
+(SELECT RECORD_DATE
+FROM   (
+    SELECT add_months(LOGIN_TIME,1) as RECORD_DATE
+    FROM   ACTIVITY
+    ORDER BY DBMS_RANDOM.RANDOM)
+WHERE  rownum < 107) p;
+*/
+
+--create table temp(CUSTOMER_ID NUMBER(25));
+
+/*
+DROP SEQUENCE CUST_ID_TEMP;
+DROP SEQUENCE RECORD_ID_SEQ;
+
+CREATE SEQUENCE RECORD_ID_SEQ
+     START WITH 101
+     INCREMENT BY 1
+     ORDER;
+
+CREATE SEQUENCE CUST_ID_TEMP
+     START WITH 2001
+     INCREMENT BY 6
+     ORDER;
+*/
+
+--select count(*) from VIOLATIONS_RECORDS;
+--select DISTINCT violation_id from VIOLATIONS_RECORDS;
+
+/*
+
+------ PURCHASE_INSURANCE TABLE ------- 
+
+CREATE TABLE MOCK_INSURANCE(
+    DATE_PURCHASE DATE);
+
+CREATE SEQUENCE PURCHASE_INSURANCE_ID_SEQ
+START WITH 1
+INCREMENT BY 1
+ORDER;
+
+CREATE SEQUENCE INSURANCE_CAR_ID_SEQ
+START WITH 1001
+INCREMENT BY 1
+ORDER;
+
+INSERT INTO PURCHASE_INSURANCE
+SELECT PURCHASE_INSURANCE_ID_SEQ.NEXTVAL, INSURANCE_CAR_ID_SEQ.NEXTVAL, e.INSURANCE_ID, p.DATE_PURCHASE AS PURCHASE_DATE, ADD_MONTHS(p.DATE_PURCHASE, 60) AS EXPIRY_DATE
+FROM
+(SELECT INSURANCE_ID FROM INSURANCE ORDER BY DBMS_RANDOM.RANDOM) e,
+(SELECT DATE_PURCHASE FROM (SELECT DATE_PURCHASE FROM MOCK_INSURANCE) WHERE ROWNUM < 11) p;
+
+
+SELECT PURCHASE_INSURANCE_ID_SEQ.CURRVAL FROM DUAL;
+SELECT INSURANCE_CAR_ID_SEQ.CURRVAL FROM DUAL;
+*/
+
+/*
+CREATE SEQUENCE CARS_AT_PICKUP_ID_SEQ
+     START WITH 9000
+     INCREMENT BY 1
+     ORDER;
+
+CREATE SEQUENCE PICKUP_POINT_ID_MAP
+     START WITH 7000
+     INCREMENT BY 1
+     ORDER;
+
+CREATE SEQUENCE CAR_ID_MAP
+     START WITH 1001
+     INCREMENT BY 1
+     ORDER;
+*/
+
+-- drop sequence PICKUP_POINT_ID_MAP;
+
+-- INSERT INTO CARS_AT_PICKUP VALUES(CARS_AT_PICKUP_ID_SEQ.NEXTVAL, PICKUP_POINT_ID_MAP.NEXTVAL,CAR_ID_MAP.NEXTVAL);
+
+-- SELECT CAR_ID_MAP.CURRVAL from dual;
+
+
+select * from user_sequences;
+
+/*
+CREATE SEQUENCE MAINTENANCE_ID_SEQ
+     START WITH 5000
+     INCREMENT BY 1
+     ORDER;
+     
+CREATE SEQUENCE CAR_ID_TEMP
+     START WITH 1001
+     INCREMENT BY 1
+     ORDER;
+     
+CREATE SEQUENCE PURCHASE_INSURANCE_ID_TEMP
+     START WITH 1
+     INCREMENT BY 1
+     ORDER;
+
+drop sequence CAR_ID_TEMP;
+drop sequence PURCHASE_INSURANCE_ID_TEMP;
+drop sequence MAINTENANCE_ID_SEQ;
+     
+INSERT INTO MAINTENANCE
+select MAINTENANCE_ID_SEQ.NEXTVAL, SUMMARY, MAINTENANCE_DATE, MAINTENANCE_COST, CAR_ID_TEMP.NEXTVAL, PURCHASE_INSURANCE_ID_TEMP.NEXTVAL 
+from (select summary, MAINTENANCE_DATE, MAINTENANCE_COST from MOCKDATA order by MAINTENANCE_COST) where MAINTENANCE_COST >= 3374;
+
+select MAINTENANCE_ID_SEQ.CURRVAL from dual;
+*/
+
+
+-- RIDE TRANSACTION 
+
+CREATE SEQUENCE TRANS_ID_SEQ
+     START WITH 501
+     INCREMENT BY 1
+     ORDER;
+     
+CREATE SEQUENCE TEMP_CUST_ID
+     START WITH 1001
+     INCREMENT BY 1
+     CYCLE
+     ORDER;
+
+CREATE SEQUENCE TEMP_CARS_AT_PICKUP_ID
+     START WITH 9001
+     INCREMENT BY 1
+     CYCLE
+     ORDER;
+
+--INSERT INTO RIDE_TRANSACTION
+
+/*
+
+select count(*)
+from  
+(SELECT VIOLATION_ID
+FROM   (
+    SELECT VIOLATION_ID
+    FROM   VIOLATIONS
+    ORDER BY DBMS_RANDOM.RANDOM)
+WHERE  rownum < 15) e,
+(SELECT RECORD_DATE
+FROM   (
+    SELECT add_months(LOGIN_TIME,1) as RECORD_DATE
+    FROM   ACTIVITY
+    ORDER BY DBMS_RANDOM.RANDOM)
+WHERE  rownum < 107) p where ROWNUM < 500;
+
+    CREATE SEQUENCE VIOLATION_ID_SEQ
+         START WITH 1
+         INCREMENT BY 1
+         ORDER;
+*/
+
+select count(*) from MOCKDATA;
+
+
+
+select cars_at_pickup_id
+from (
+select cars_at_pickup_id from cars_at_pickup
+order by DBMS_RANDOM.RANDOM);
+
+
+select CUSTOMER_ID
+from (
+select CUSTOMER_ID from CUSTOMERS
+order by DBMS_RANDOM.RANDOM);
+
+
+select cars_at_pickup_id, CUSTOMER_ID
+from  (
+select cars_at_pickup_id, CUSTOMER_ID
+from (
+select cars_at_pickup_id
+from cars_at_pickup
+order by DBMS_RANDOM.RANDOM),
+(
+select CUSTOMER_ID
+from CUSTOMERS
+order by DBMS_RANDOM.RANDOM ) where ROWNUM < 200
+) order by DBMS_RANDOM.RANDOM;
+
+select cars_at_pickup_id, CUSTOMER_ID
+from (
+select cars_at_pickup_id
+from cars_at_pickup
+order by DBMS_RANDOM.RANDOM),
+(
+select CUSTOMER_ID
+from CUSTOMERS
+order by DBMS_RANDOM.RANDOM) where ROWNUM < 100;
+
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    CURSOR C1 is select CARS_AT_PICKUP_ID from CARS_AT_PICKUP ;
+    CURSOR C2 is select CUSTOMER_ID from CUSTOMERS order by DBMS_RANDOM.RANDOM;
+    CURSOR C3 is select START_TIME from MOCKDATA order by DBMS_RANDOM.RANDOM;
+    CURSOR C4 is select DISTANCE from MOCKDATA order by DBMS_RANDOM.RANDOM;
+    
+    TYPE PICKUP IS VARRAY(20000) OF CARS_AT_PICKUP.CARS_AT_PICKUP_ID%TYPE;
+    TYPE CUST IS VARRAY(20500) OF CUSTOMERS.CUSTOMER_ID%TYPE;
+    TYPE START_TIME_TYPE IS VARRAY(1000000) OF MOCKDATA.START_TIME%TYPE;
+    TYPE DISTANCE_TYPE IS VARRAY(1000000) OF MOCKDATA.DISTANCE%TYPE;
+    
+    PICKUP_ARR PICKUP := PICKUP();
+    CUST_ARR CUST := CUST();
+    START_TIME_ARR START_TIME_TYPE := START_TIME_TYPE();
+    DISTANCE_ARR DISTANCE_TYPE := DISTANCE_TYPE();
+     
+    PICKUP_INDEX NUMBER := 1;
+    CUST_INDEX NUMBER := 1;
+    START_TIME_INDEX NUMBER := 1;
+    DISTANCE_INDEX NUMBER := 1;
+    
+    DB_CAR_ID CARS_AT_PICKUP.CAR_ID%TYPE;
+    
+BEGIN
+    for i in C1 loop
+        PICKUP_ARR.EXTEND;
+        PICKUP_ARR(PICKUP_INDEX) := i.CARS_AT_PICKUP_ID;
+        PICKUP_INDEX := PICKUP_INDEX + 1;
+    end loop;
+    
+    for i in C2 loop
+        CUST_ARR.EXTEND;
+        CUST_ARR(CUST_INDEX) := i.CUSTOMER_ID;
+        CUST_INDEX := CUST_INDEX + 1;
+    end loop;
+    
+    for i in C3 loop
+        START_TIME_ARR.EXTEND;
+        START_TIME_ARR(START_TIME_INDEX) := i.START_TIME;
+        START_TIME_INDEX := START_TIME_INDEX + 1;
+    end loop;
+    
+    for i in C4 loop
+        DISTANCE_ARR.EXTEND;
+        DISTANCE_ARR(DISTANCE_INDEX) := i.DISTANCE;
+        DISTANCE_INDEX := DISTANCE_INDEX + 1;
+    end loop;
+          
+    PICKUP_INDEX := 1;
+    CUST_INDEX := 1;
+    START_TIME_INDEX := 1;
+    DISTANCE_INDEX := 1;
+    
+    for i in 1 .. 25000 loop
+    
+        if PICKUP_INDEX >= 50 then
+            PICKUP_INDEX := 1;
+        end if;    
+        if CUST_INDEX >= 10000 then
+            CUST_INDEX := 1;
+        end if;
+        
+        select CAR_ID into DB_CAR_ID from CARS_AT_PICKUP where CARS_AT_PICKUP_ID = PICKUP_ARR(PICKUP_INDEX);
+        
+        insert into RIDE_TRANSACTION values (
+            TRANS_ID_SEQ.NEXTVAL,
+            CUST_ARR(CUST_INDEX),
+            PICKUP_ARR(PICKUP_INDEX),
+            START_TIME_ARR(START_TIME_INDEX),
+            START_TIME_ARR(START_TIME_INDEX) + 2/24,
+            START_TIME_ARR(START_TIME_INDEX) + 4/24,
+            DB_CAR_ID,
+            DISTANCE_ARR(DISTANCE_INDEX),
+            'COMPLETED');
+        
+     /*   dbms_output.put_line(
+        TRANS_ID_SEQ.NEXTVAL || ' ' || 
+        CUST_ARR(CUST_INDEX) || ' '|| 
+        PICKUP_ARR(PICKUP_INDEX) || ' ' || 
+        to_char(START_TIME_ARR(START_TIME_INDEX),'DD-MM-YYYY HH:MI:SS') || ' '|| 
+        to_char(START_TIME_ARR(START_TIME_INDEX) + 2/24,'DD-MM-YYYY HH:MI:SS') || ' ' || 
+        to_char(START_TIME_ARR(START_TIME_INDEX) + 4/24,'DD-MM-YYYY HH:MI:SS') ||' '|| 
+        DB_CAR_ID || ' ' || 
+        DISTANCE_ARR(DISTANCE_INDEX));
+       */ 
+        
+        PICKUP_INDEX := PICKUP_INDEX + 1;
+        CUST_INDEX := CUST_INDEX + 1;
+        DISTANCE_INDEX := DISTANCE_INDEX + 1;
+        START_TIME_INDEX := START_TIME_INDEX + 1;
+    end loop;
+    
+   -- dbms_output.put_line(to_char(sysdate, 'DD-MON-YYYY HH:MI:SS'));
+   -- dbms_output.put_line(to_char(sysdate+1/24, 'DD-MON-YYYY HH:MI:SS')); 
+END;
+
+select * from user_sequences;
+
+select TRANS_ID_SEQ.CURRVAL from dual;
+
+/*
+DROP SEQUENCE TRANS_ID_SEQ;
+
+CREATE SEQUENCE TRANS_ID_SEQ
+ START WITH 101
+ INCREMENT BY 1
+ ORDER;
+ */
+ 
+-- delete from RIDE_TRANSACTION;
+
+select count(*) from RIDE_TRANSACTION;
+
+select car_type, count(car_type) from car where car_id in (select car_id from RIDE_TRANSACTION) group by car_type;
+
+select car.car_type, sum(p.count_trans)/(select count(*) from RIDE_TRANSACTION) *100 || '%' as Average_Rides
+from car, (select car_id, count(trans_id) as count_trans from RIDE_TRANSACTION group by car_id) p
+where car.car_id = p.car_id
+group by car.car_type;
+
+
+set serveroutput on;
+
+begin
+    main();
+end;
+
+select decode(trunc((sysdate - DATE_OF_BIRTH)/365),35,'Yes','No') as Result, DATE_OF_BIRTH  from CUSTOMERS where CUSTOMER_ID = 11000;
+
+select * from customers where first_name = 'Vignesh';
+begin
+update customers set last_name = 'Kumar' where customer_id = 11004;
+commit;
+end;
+
+
+--sanket
+set serveroutput on;
+begin
+   MAIN_SANKET();
+   --dbms_output.put_line(check_car_availability(1007,to_timestamp(sysdate+1/24),to_timestamp(sysdate+2/24)));
+   -- dbms_output.put_line(check_car_availability(1007,to_timestamp(sysdate+1/24), to_timestamp(sysdate+3/24)));  
+end;
+
+select to_char(sysdate,'DD-MON-YYYY HH:MI:SS AM') from dual;
+check_car_availability(1007,to_timestamp(sysdate+1/24),to_timestamp(sysdate+2/24));
+
+
+/*
+case 1 - 9.30-10.30 X X
+case 2 - 10 -11 X X
+case 3 - 10.30 - 10.45 X X
+case 4 - 10.30 - 11.30 X X
+case 5 - 9.30-9.45 EMPTY EMPTY
+case 6 - 11.15 -12 EMPTY EMPTY
+case 7 - 9 -12 X X
+
+select * from RIDE_TRANSACTION 
+where ((START_TIME >= '06-DEC-21 10.56.09.000000000 PM' or END_TIME >= '06-DEC-21 10.56.09.000000000 PM')   and 
+      (START_TIME <= '06-DEC-21 11.56.09.000000000 PM' or END_TIME <= '06-DEC-21 11.56.09.000000000 PM'))  and 
+      CAR_ID = 1007 and STATUS = 'IN PROCESS';
+
+where (10 >= '9' or 11 >= '9')   and 
+      (10 <= '12' or 11 <= '12')  and 
+      CAR_ID = 1007 and STATUS = 'IN PROCESS';
+
+case 1 - 9.30-10.30 X X                                                         |10       |11       
+case 2 - 10 -11 X X
+case 3 - 10.30 - 10.45 X X
+case 4 - 10.30 - 11.30 X X
+case 5 - 9.30-9.45 EMPTY EMPTY
+case 6 - 11.15 -12 EMPTY EMPTY
+case 7 - 9 -12 X X
+
+select to_char((sysdate),'DD-MON-YYYY HH:MI:SS AM'),to_char((sysdate +1/24),'DD-MON-YYYY HH:MI:SS AM'), to_timestamp(sysdate) from dual;
+
+delete from ride_transaction where trans_id = 66666;
+
+*/
+
+
+
+--vignesh
+
+set serveroutput on;
+begin
+    main_vignesh();
+end;
+
+select to_char(sysdate,'DD-MON-YYYY HH:MI:SS AM') from dual;
+alter table payments modify(customer_card varchar2(50) ENCRYPT);
+
+
+select trunc(to_char(sysdate)) from dual;
+
+select trans_id,
+    case when end_time between to_date('01-01-2021 23:59:59','DD-MM-YYYY HH24:MI:SS') and to_date('01-04-2021 00:00:00','DD-MM-YYYY HH24:MI:SS') THEN 'Q1'
+        when end_time between to_date('01-04-2021 23:59:59','DD-MM-YYYY HH24:MI:SS') and to_date('01-07-2021 00:00:00','DD-MM-YYYY HH24:MI:SS') THEN 'Q2'
+        when end_time between to_date('01-07-2021 23:59:59','DD-MM-YYYY HH24:MI:SS') and to_date('01-09-2021 00:00:00','DD-MM-YYYY HH24:MI:SS') THEN 'Q3'
+        when end_time between to_date('01-09-2021 23:59:59','DD-MM-YYYY HH24:MI:SS') and to_date('01-12-2021 00:00:00','DD-MM-YYYY HH24:MI:SS') THEN 'Q4'
+    end as quarter
+from ride_transaction
+where extract(year from end_time) = 2021
+order by quarter;
+
+select * from analyst_view;
+select * from support_view;
+select * from audit_view;
+
+
+--aish
+set serveroutput on;
+begin
+    MAIN_AISH();
+end;
+
+
+
+
+select count(*) from customers where customer_id >11000;
+select count(*) from customers where customer_id >11000;
+
+
+
+
+
+
+
+
+--rumi
+
+/*
+create table TEST (name varchar2(50), card_details varchar2(50) ENCRYPT);
+insert into TEST values('sanket','1234-1234-1234-12345');
+select * from TEST;
+drop table TEST;
+*/
+
+begin
+
+pckg_customer.insert_customer();
+pckg.car.insert_car();
+
+pckg.customer.update_customer();
+NULL;
+end;
+
+CREATE SEQUENCE CAR_ID_SEQ
+START WITH 1001
+INCREMENT BY 1
+ORDER;
+
+
+ SELECT distinct CUSTOMER_ID FROM RIDE_TRANSACTION WHERE TRANS_ID IN 
+    (select distinct TRANS_ID from PAYMENTS WHERE to_date(PAY_DATE) = to_date(SYSDATE) AND STATUS = 'COMPLETED');
+    
+    select distinct TRANS_ID from PAYMENTS WHERE to_date(PAY_DATE) = to_date(SYSDATE) AND STATUS = 'COMPLETED' and TRANS_ID=7727;
+    
+    
+select car.car_type, p.distance,  round(sum(p.count_trans)/(select count(*) from RIDE_TRANSACTION) *100,2) || '%' as Average_Rides
+from car, 
+(
+select car_id, distance, count(car_id) as count_trans 
+from RIDE_TRANSACTION 
+group by car_id, Distance
+) p
+where car.car_id = p.car_id
+group by car.car_type,p.distance;
+
+
+select car.car_type, sum(p.count_trans)/(select count(*) from RIDE_TRANSACTION) *100 || '%' as Average_Rides
+from car, (select car_id, count(trans_id) as count_trans from RIDE_TRANSACTION group by car_id) p
+where car.car_id = p.car_id
+group by car.car_type;
+
+
+select distance, count(distance) as total   from ride_transaction group by distance order by distance;
+
+select car.car_type, q.distance,
+round( sum(q.total) /
+    (
+        select Average_Rides from
+        (
+            select  car.car_type as car_type, sum(p.count_trans) as Average_Rides
+            from car, (select car_id, count(trans_id) as count_trans from RIDE_TRANSACTION group by car_id) p
+            where car.car_id = p.car_id 
+            group by car.car_type
+        )
+        where car_type = car.car_type
+    ) *100 ,2)|| '%' as Average_Rides
+from car,
+(
+    select t.distance, car.car_id, sum(total) as total
+    from car,
+    (
+        select 
+        case when distance between 0 and 10 then '0-10 Miles'
+             when distance between 11 and 20 then '11-20 Miles'
+             when distance between 21 and 30 then '21-30 Miles'
+             when distance between 31 and 40 then '31-40 Miles'
+             when distance between 41 and 50 then '41-50 Miles'
+             when distance between 51 and 60 then '51-60 Miles'
+             when distance is null then 'INVALID'
+        END as distance, car_id,count(distance) as total 
+        from ride_transaction group by distance, car_id
+    ) t
+    where car.car_id = t.car_id
+    group by t.distance, car.car_id
+) q
+where car.car_id = q.car_id
+group by car.car_type, q.distance
+order by car.car_type, distance;
+
+
+
+select  count(*) from RIDE_TRANSACTION;
+
+
+
+--------------------------------------------------------------
+
+--report 3
+---------------------------------------------------------------
+select STATE, count(*) from PICKUP_POINTS group by STATE;
+
+
+select STATES_BY_TRANS.STATE, qt.quarter, SUM(PAYMENT_BILL.BILL_AMOUNT) as BILL
+from RIDE_TRANSACTION, PAYMENT_BILL,
+(
+    select trans_id,
+        case
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-JAN-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('31-MAR-2021','DD-MON-YYYY') then 'Q1'
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-APR-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('30-JUN-2021','DD-MON-YYYY') then 'Q2'
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-JUL-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('30-SEP-2021','DD-MON-YYYY') then 'Q3'
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-OCT-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('31-DEC-2021','DD-MON-YYYY') then 'Q4'
+        END as quarter
+    from ride_transaction
+    where extract(year from TRANSACTION_DATE) = 2021
+) qt,
+(
+    select TRANS_ID, STATE
+    FROM RIDE_TRANSACTION,
+    (
+        select CARS_AT_PICKUP.CARS_AT_PICKUP_ID, CARS_AT_PICKUP.PICKUP_POINT_ID, STATE
+        from CARS_AT_PICKUP,
+        (
+            select PICKUP_POINT_ID, STATE FROM PICKUP_POINTS
+        ) q
+        where CARS_AT_PICKUP.PICKUP_POINT_ID = q.PICKUP_POINT_ID
+    ) p
+    where RIDE_TRANSACTION.CARS_AT_PICKUP_ID = p.CARS_AT_PICKUP_ID
+) STATES_BY_TRANS
+where 
+    RIDE_TRANSACTION.TRANS_ID = STATES_BY_TRANS.TRANS_ID and
+    RIDE_TRANSACTION.TRANS_ID = PAYMENT_BILL.TRANS_ID and
+    RIDE_TRANSACTION.TRANS_ID = qt.TRANS_ID and
+    extract(year from RIDE_TRANSACTION.END_TIME) = 2021
+group by STATE, quarter
+order by STATE, quarter
+;
+
+update RIDE_TRANSACTION
+set 
+transaction_date = to_date('12-NOV-2021 07:46:22 PM','DD-MON-YYYY HH:MI:SS AM'),
+START_TIME = to_timestamp('12-NOV-2021 08:46:22 PM','DD-MON-YYYY HH:MI:SS AM'),
+END_TIME = to_timestamp('12-NOV-2021 10:46:22 PM','DD-MON-YYYY HH:MI:SS AM')
+where to_char(transaction_date,'DD-MON-YYYY') = '09-AUG-2021';
+
+update PAYMENTS
+set 
+pay_DATE = to_timestamp('12-NOV-2021 11:46:22 PM','DD-MON-YYYY HH:MI:SS AM')
+where to_char(pay_date,'DD-MON-YYYY') = '09-AUG-2021'; 
+
+select count(*) from RIDE_TRANSACTION where to_char(transaction_date,'DD-MON-YYYY') = '09-AUG-2021';
+
+select trans_id,
+    case
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-JAN-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('31-MAR-2021','DD-MON-YYYY') then 'Q1'
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-APR-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('30-JUN-2021','DD-MON-YYYY') then 'Q2'
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-JUL-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('30-SEP-2021','DD-MON-YYYY') then 'Q3'
+            when TRUNC(TRANSACTION_DATE) >= to_date('01-OCT-2021','DD-MON-YYYY') and TRUNC(TRANSACTION_DATE) <= to_date('31-DEC-2021','DD-MON-YYYY') then 'Q4'
+    END as quarter
+from ride_transaction
+where extract(year from END_TIME) = 2021
+order by quarter;
+
+select * from ride_transaction
+where TRANSACTION_DATE = to_date('31-MAR-2021','DD-MON-YYYY');
+
+select trunc(END_TIME) from ride_transaction where trunc(END_TIME) < sysdate;
+
+select trans_id,
+   case
+        when TRUNC(END_TIME) between '01-JAN-2021' and  '01-APR-2021' then 'Q1'
+        when TRUNC(END_TIME) between '01-APR-2021' and  '01-JUL-2021' then 'Q2'
+        when TRUNC(END_TIME) between '01-JUL-2021' and  '01-OCT-2021' then 'Q3'
+        when TRUNC(END_TIME) between '01-OCT-2021' and  '31-DEC-2021' then 'Q4'
+    END as quarter
+from ride_transaction
+where extract(year from END_TIME) = 2021
+order by quarter;
+
+select * from ride_transaction where trans_id = 45517;
+
+
+select extract(year from sysdate) from dual;
+
+select TRANS_ID, STATE
+FROM RIDE_TRANSACTION,
+(
+    select CARS_AT_PICKUP.CARS_AT_PICKUP_ID, CARS_AT_PICKUP.PICKUP_POINT_ID, STATE
+    from CARS_AT_PICKUP,
+    (
+        select PICKUP_POINT_ID, STATE FROM PICKUP_POINTS
+    ) q
+    where CARS_AT_PICKUP.PICKUP_POINT_ID = q.PICKUP_POINT_ID
+) p
+where RIDE_TRANSACTION.CARS_AT_PICKUP_ID = p.CARS_AT_PICKUP_ID;
+
+
+
+---------------------------------------------------
+-- just to verify total of bill till date 
+----------------------------------------------------
+select sum(BILL)
+from
+(
+    select (DISTANCE * RATE_PER_HR) as BILL
+    from RIDE_TRANSACTION,
+    (
+        select CAR_ID, RATE_PER_HR FROM CAR
+    ) CAR_RATE
+where 
+RIDE_TRANSACTION.CAR_ID = CAR_RATE.CAR_ID
+)
+
+---------------------------------------------------
+--- Payment View with bill amount
+--------------------------------------------------
+
+create or replace view payment_bill as
+select pay_id, payments.trans_id, pay_date, discount_id, payments.status, START_TIME, END_TIME, 
+    case
+        when ceil((extract(hour from END_TIME - START_TIME)*60 + round(abs(extract(minute from  END_TIME - START_TIME)),2))/60) < 1 then 1
+        else
+            ceil(round(extract(hour from END_TIME - START_TIME)*60 + round(abs(extract(minute from  END_TIME - START_TIME)),2),2)/60)
+    END as Ride_Duration, distance, RATE_PER_HR, 
+    round(RATE_PER_HR * 
+        case
+            when ceil((extract(hour from END_TIME - START_TIME)*60 + round(abs(extract(minute from  END_TIME - START_TIME)),2))/60) < 1 then 1
+        else
+           ceil((extract(hour from END_TIME - START_TIME)*60 + round(abs(extract(minute from  END_TIME - START_TIME)),2))/60)
+        END,2) as BILL_AMOUNT
+from payments, ride_transaction,
+(
+ select CAR_ID, RATE_PER_HR FROM CAR
+) p
+where ride_transaction.car_id = p.car_id and 
+    ride_transaction.trans_id = payments.trans_id;
+
+
+select ceil((extract(hour from END_TIME - START_TIME)*60 + round(abs(extract(minute from START_TIME - systimestamp)),2))/60)
+from ride_transaction where trans_id =8780;
+
+
+select sum(bill_amount) from payment_bill;
+
+
+
+-------------------------------------------------------
+--  usage pattern
+--------------------------------------------------------
+
+select 
+    case
+        when Duration = '2-4 Hr' and distance > 20 then 'gt 20' 
+    end as expected, count(distance)
+from
+(
+    select
+        case
+            when ride_duration >= 0 and ride_duration < 2 then '0-2 Hr'
+            when ride_duration >= 2 and ride_duration < 4 then '2-4 Hr'
+            when ride_duration >= 4 and ride_duration < 6 then '4-6 Hr'
+            when ride_duration >= 6 and ride_duration < 8 then '6-8 Hr'
+            when ride_duration >= 8 and ride_duration <= 10 then '8-10 Hr'
+        end as Duration, distance, count(ride_duration)
+    from payment_bill
+    group by ride_duration, distance
+)
+group by distance, duration
+
+select
+    case
+        when ride_duration >= 0 and ride_duration < 2 then '0-2 Hr'
+        when ride_duration >= 2 and ride_duration < 4 then '2-4 Hr'
+    end as "2-4", count(ride_duration) as over
+from payment_bill
+where distance < 20 and distance > 0 
+group by ride_duration
+
+
+
+
+select
+    case
+        when ride_duration >= 0 and ride_duration < 1 then '0-1 Hr'
+        when ride_duration >= 1 and ride_duration < 3 then '1-3 Hr'
+        when ride_duration >= 3 and ride_duration < 5 then '3-5 Hr'
+        when ride_duration >= 5 and ride_duration < 8 then '5-8 Hr'
+        when ride_duration >= 8 and ride_duration <= 10 then '8-10 Hr'
+    end as Frame, over
+from
+(
+select 
+    *
+from 
+(
+    select ride_duration , count(ride_duration) as over
+    from payment_bill
+    where distance > 10 and distance > 0  and ride_duration >= 0 and ride_duration < 1 
+    group by ride_duration
+) 
+UNION
+(
+    select ride_duration , count(ride_duration) as over
+    from payment_bill
+    where distance > 20  and ride_duration >= 1 and  ride_duration < 3
+    group by ride_duration
+) 
+UNION
+(
+    select ride_duration, count(ride_duration) as over
+    from payment_bill
+    where distance > 30  and ride_duration >= 3 and  ride_duration < 5
+    group by ride_duration
+)
+UNION
+(
+    select ride_duration, count(ride_duration) as over
+    from payment_bill
+    where distance > 40  and ride_duration >= 5 and  ride_duration < 8
+    group by ride_duration
+)
+UNION
+(
+    select ride_duration, count(ride_duration) as over
+    from payment_bill
+    where distance > 50  and ride_duration >= 8 and  ride_duration <= 10
+    group by ride_duration
+)
+)
+
+
+-------------------------------------------------------------
+--- Feedback
+-------------------------------------------------------------
+
+select ratings, round(count(ratings)/ (select count(*) from feedback) * 100,2) || ' %' as Percentage 
+from feedback
+group by ratings
+order by ratings;
+
+-------------------------------------------------------------
+-- Inactive customers
+-------------------------------------------------------------
+
+select customers.customer_id, customers.first_name, customers.last_name, customers.email_id
+from customers
+where customers.customer_id NOT IN (select distinct customer_id from ride_transaction) or
+   customers.customer_id in (select distinct customer_id from ride_transaction where months_between(sysdate,transaction_date) > 6);
+
+--------------------------------------------------------------
+--- 
+--------------------------------------------------------------
+
+select distinct count(customer_id) from ride_transaction where  months_between(sysdate,transaction_date) > 12;
+
+set serveroutput on;
+begin
+   --MAIN_VIGNESH();
+   --MAIN_SANKET();
+   pckg_utils.show_all_available_cars(to_timestamp((sysdate)), to_timestamp((sysdate+4/24)));
+     --pckg_utils.get_car(1004);
+    --PROC_INSERT_RIDE_TRANSACTION(88,4000,9006,to_timestamp((sysdate)),to_timestamp((sysdate+2/24)),1004,0,'IN PROCESS');
+    -- PROC_UPDATE_RIDE_TRANSACTION(88,9006,to_timestamp((sysdate)), to_timestamp((sysdate+4/24)),1004,42,'COMPLETED','1234-5678-9789-1233',null);
+end;
+
+
+create table audit_data (USER_NAME varchar2(50) not null, action varchar2(25), time_stamp timestamp default systimestamp not null);
+
+
+
+select CAR_ID, CAR_MAKE as "Make", MODEL as "Model", CAR_TYPE as "Car Type", '$ ' ||RATE_PER_HR as "Rate/ Hr", CAR_NUMBER as "Car Number", MAX_PERSON as "Seat Capacity"
+from CAR;
+
+select cars_at_pickup_id, p.PICKUP_POINT_ID, NAME, CITY, ZIP, STATE
+from pickup_points,
+(
+    select cars_at_pickup_id, pickup_point_id, car_id  from cars_at_pickup
+) p
+where pickup_points.pickup_point_id = p.pickup_point_id;
+
+
