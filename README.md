@@ -32,7 +32,7 @@ However, only for _demo_ purpose used static values in package/procedure calls
 
     Step1: Run the DDL script 'DDL\bootstrap' which will create All Objects
   
-    Step2: Run the Users script from 'SQL\Users\' which creates the Users and Grant them access accordingly
+    Step2: Run the Users script from 'DDL\Users\users' which creates the Users and Grant them access accordingly
         
     Step3: Uncomment individual package calls and excecute one by one from the DML script 'DML\sample_DML' to perform sample DML operations
 
@@ -42,7 +42,7 @@ However, only for _demo_ purpose used static values in package/procedure calls
     
     Step2: Run the DDL script 'DDL\bootstrap' which will create All Objects
   
-    Step3: Run the Users script from 'SQL\Users\' which creates the Users and Grant them access accordingly
+    Step3: Run the Users script from 'DDL\Users\users' which creates the Users and Grant them access accordingly
         
     Step4: Uncomment individual package calls and excecute one by one from the DML script 'DML\sample_DML' to perform sample DML operations
     
